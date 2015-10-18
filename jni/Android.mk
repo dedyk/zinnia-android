@@ -11,4 +11,5 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := libzinniajni
 LOCAL_SRC_FILES := libzinniajni.cpp
 LOCAL_STATIC_LIBRARIES := libzinnia
+LOCAL_LDFLAGS	:= -Wl,--hash-style=sysv
 include $(BUILD_SHARED_LIBRARY)
