@@ -4,9 +4,6 @@
 
 #include <cstring>
 
-// kompilacja:
-// g++ -fPIC -Wall -shared libzinniajni.cpp -o libzinniajni.so -I/opt/jdk1.7.0_80/include/ -I/opt/jdk1.7.0_80/include/linux .libs/libzinnia.so.0
-
 /*
  * Class:     org_xdump_android_zinnia_Zinnia
  * Method:    zinnia_character_new
