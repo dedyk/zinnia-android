@@ -166,7 +166,15 @@ JNIEXPORT jstring JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1character
  */
 JNIEXPORT jstring JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1result_1value
   (JNIEnv *, jobject, jlong, jlong);
-
+  
+/*
+ * Class:     org_xdump_android_zinnia_Zinnia
+ * Method:    zinnia_result_value_as_int_array
+ * Signature: (JJ)[I
+ */
+JNIEXPORT jintArray JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1result_1value_1as_1int_1array
+  (JNIEnv *, jobject, jlong, jlong);
+  
 /*
  * Class:     org_xdump_android_zinnia_Zinnia
  * Method:    zinnia_result_score

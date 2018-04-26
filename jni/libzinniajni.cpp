@@ -2,6 +2,11 @@
 #include <jni.h>
 #include "libzinniajni.h"
 
+#include <cstring>
+
+// kompilacja:
+// g++ -fPIC -Wall -shared libzinniajni.cpp -o libzinniajni.so -I/opt/jdk1.7.0_80/include/ -I/opt/jdk1.7.0_80/include/linux .libs/libzinnia.so.0
+
 /*
  * Class:     org_xdump_android_zinnia_Zinnia
  * Method:    zinnia_character_new
@@ -199,7 +204,7 @@ JNIEXPORT jint JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1character_1p
 JNIEXPORT jint JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1character_1parse2
 (JNIEnv *env, jobject jobj, jlong character, jstring str, jlong length)
 {
-    zinnia_character_t* p = reinterpret_cast<zinnia_character_t*>(character);
+    // zinnia_character_t* p = reinterpret_cast<zinnia_character_t*>(character);
     /* TODO */
     return 0;
 }
@@ -212,7 +217,7 @@ JNIEXPORT jint JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1character_1p
 JNIEXPORT jint JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1character_1to_1string
 (JNIEnv *env, jobject jobj, jlong character, jstring buf, jlong length)
 {
-    zinnia_character_t* p = reinterpret_cast<zinnia_character_t*>(character);
+    // zinnia_character_t* p = reinterpret_cast<zinnia_character_t*>(character);
     /* TODO */
     return 0;
 }
@@ -239,6 +244,38 @@ JNIEXPORT jstring JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1result_1v
 {
     zinnia_result_t* p = reinterpret_cast<zinnia_result_t*>(result);
     return env->NewStringUTF(zinnia_result_value(p, index));
+}
+
+/*
+ * Class:     org_xdump_android_zinnia_Zinnia
+ * Method:    zinnia_result_value_as_int_array
+ * Signature: (JJ)[I
+ */
+JNIEXPORT jintArray JNICALL Java_org_xdump_android_zinnia_Zinnia_zinnia_1result_1value_1as_1int_1array
+  (JNIEnv *env, jobject jobj, jlong result, jlong index)
+{    
+    zinnia_result_t* p = reinterpret_cast<zinnia_result_t*>(result);
+    
+    //
+    
+    const char *value_result = zinnia_result_value(p, index);    
+    unsigned int value_result_size = strlen(value_result);
+    
+    //
+    
+    jintArray intArrayResult = env->NewIntArray(value_result_size);
+    jint intArrayResultArrays[value_result_size];
+    
+    for (unsigned int idx = 0; idx < value_result_size; ++idx) {
+        
+        int value_result_idx_value = 256 + value_result[idx];
+                
+        intArrayResultArrays[idx] = value_result_idx_value;
+    }
+    
+    env->SetIntArrayRegion(intArrayResult, 0, value_result_size, intArrayResultArrays);
+
+    return intArrayResult;
 }
 
 /*
