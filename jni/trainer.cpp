@@ -103,6 +103,8 @@ class TrainerImpl: public Trainer {
     if (!fn) {
       return false;
     }
+    // FM_INFO: jesli ponizsza linijka nie kompiluje sie zamien ja na nastepujaca
+    // x_.push_back(std::make_pair(y, fn));
     x_.push_back(std::make_pair<std::string, FeatureNode *>(y, fn));
     return true;
   }
